@@ -1,6 +1,7 @@
 //Values for currencies
 let totalTickets = 0;
 let totalTicketCap = 100;
+let totalCash = 0;
 //Value for the tickets that are waiting to be processed
 let ticketsInQueue = 0;
 //This value determines when the tickets get passed along to the workers
@@ -12,3 +13,7 @@ let inactiveWorkers = 5;
 let generateTicketPower = 1;
 //Value to set the ticket progress bar to its HTML element
 let generatedTicketBar = document.getElementById("GeneratedTicketBar");
+
+let workersActive = false;
+
+let workerInterval;

@@ -39,5 +39,36 @@ window.setInterval( function(){
 
    document.getElementById("TotalWorkerText").innerHTML = inactiveWorkers + "/" + totalWorkers + " workers";
 
+  //If there is a worker missing(working) then start the timer to resolve the ticket
+  if(inactiveWorkers < totalWorkers) {
+        document.getElementById("workerprogress").style.visibility = "visible";
+
+
+        workerInterval = setInterval(resolveTickets, 2000);
+
+  }
  }
+
+ generatedTicketBar.setAttribute("value", totalTickets);
+ generatedTicketBar.setAttribute("max", totalTicketCap);
+ generatedTicketBar.setAttribute("data-label", totalTickets + " tickets");
+
 },1000)
+
+//The workers resolving timer(2 seconds)
+function resolveTickets(){
+
+  if(inactiveWorkers < totalWorkers){
+    inactiveWorkers += 1;
+    totalCash += ticketsInQueue;
+  }
+
+  if(inactiveWorkers = totalWorkers){
+    document.getElementById("workerprogress").style.visibility = "hidden";
+    clearInterval(workerInterval);
+  }
+
+
+  document.getElementById("TotalWorkerText").innerHTML = inactiveWorkers + "/" + totalWorkers + " workers";
+
+}
