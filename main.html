@@ -4,7 +4,7 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>IT</title>
+	<title>HD Incremental | v0.0.1</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -18,15 +18,17 @@
 
   <header class="page-header header container-fluid">
 
-    <div class="LandingText" id="LandingTextid">
-       <div class="loader" id="LandingLoader"><div></div><div></div><div></div><div></div></div>
-	     <h1>Welcome to IT Incremental!</h1>
-	     <p>Press spacebar to continue.</p>
-    </div>
+		<div class="main-content">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+				<div class="btn-wrapper">
+					<p id="TotalWorkerText">5/5 workers</p>
+					<progress id="GeneratedTicketBar" data-label='0 tickets' value="0" max="100">
 
-    <div class="main-content">
-      <div class="container">
-        <p>.</p>
+					</progress>
+        	<button id="GenerateTicketButton" class="Button1" onclick="GenerateTicket()">
+						Generate Ticket
+					</button>
+				</div>
       </div>
     </div>
 

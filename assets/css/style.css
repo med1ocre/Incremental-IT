@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "myFirstFont";
+    src: url("./assets/fonts/NumberFont.ttf");
+}
+
+.NumberFont {
+    font-family: "myFirstFont";
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -38,7 +47,7 @@ body {
   border: 8px solid #6ab446;
   border-radius: 50%;
   animation: loader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #6ab446 transparent transparent transparent;
+  border-color: white transparent transparent transparent;
 }
 .loader div:nth-child(1) {
   animation-delay: -0.45s;
@@ -61,4 +70,117 @@ body {
 .center {
   justify-content: center;
   text-align: center;
+}
+
+.main-content{
+  left: 50%;
+	position: absolute;
+	top: 45%;
+	transform: translate(-50%, -55%);
+	text-align: center;
+  width:100%;
+  height:50%;
+}
+
+.Button1 {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.Button1:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.Button1:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.Button1:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+#TicketNumberText{
+  color:white;
+  font-size:3em;
+  cursor:default;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+#GeneratedTicketBar {
+  height: 2em;
+  width: 100%;
+  background-color: #dcdcdc;
+  position: relative;
+  font-weight:bold;
+  float: left;
+  margin-bottom:2em;
+
+}
+#GeneratedTicketBar:before {
+  content: attr(data-label);
+  font-size: 1em;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  left: 0;
+  right: 0;
+}
+#GeneratedTicketBar .value {
+  background-color: #05a000;
+  display: inline-block;
+  height: 100%;
+}
+
+#GeneratedTicketBar::-moz-progress-bar {
+  background: #05a000;
+}
+
+#GeneratedTicketBar::-webkit-progress-value {
+  background: #05a000;
+}
+
+#GeneratedTicketBar::-webkit-progress-bar {
+  background: #dcdcdc;
+}
+
+#TotalWorkerText{
+  color:white;
 }
