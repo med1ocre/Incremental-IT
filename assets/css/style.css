@@ -151,7 +151,7 @@ body {
   position: relative;
   font-weight:bold;
   float: left;
-  margin-bottom:2em;
+  margin-bottom:1em;
 
 }
 #GeneratedTicketBar:before {
@@ -181,38 +181,34 @@ body {
   background: #dcdcdc;
 }
 
-#TotalWorkerText{
+.whitetext{
   color:white;
 }
 
-#WorkloadText{
-  color:white;
+.navicon{
+  width:2em;
+  height:2em;
+  float: right;
 }
 
-.workerprogress{
+
+#QueueTicketBarId{
     position: relative;
     height: 10px;
     width: 100%;
-    margin-bottom:1em;
-    visibility: hidden;
-
 }
-.workerprogress .color{
+#QueueTicketBarId .color{
     position: absolute;
     background-color: #ffffff;
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
-    animation: progres 2s infinite linear;
-}
-
-:root {
-  --width: 0%;
+    width: 0px;
+    height: 8px;
+    border-radius: 15px;
+    animation: progres 3.5s infinite linear;
 }
 
 @keyframes progres{
     0%{
-        width: var(--width);
+      width: 0%;
     }
     25%{
         width: 25%;

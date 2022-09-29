@@ -1,10 +1,10 @@
-//Landing page
+//**Landing page**
 //Press spacebar to continue function
 document.body.onkeyup = function(e) {
   if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
 
     //Hide the landing text and make the loading icon visible for 1.5 second
-    document.getElementById("LandingTextid").style.visibility = "hidden";
+    landingTextDisp.style.visibility = "hidden";
     document.getElementById("LandingLoader").style.visibility = "visible";
 
     //Get rid of the loading icon after 1.5 second
@@ -14,61 +14,50 @@ document.body.onkeyup = function(e) {
   }
 }
 
-
-//Function for generating tickets via button
-function GenerateTicket(){
-
-  totalTickets += generateTicketPower;
-
+//This is to refresh/set the ticket bar to its value so that it displays correctly
+function refreshticketbar(){
   generatedTicketBar.setAttribute("value", totalTickets);
   generatedTicketBar.setAttribute("max", totalTicketCap);
   generatedTicketBar.setAttribute("data-label", totalTickets + " tickets");
 
 }
 
-//Every second the contents of this function will run
-window.setInterval( function(){
-
-  //Here we check for tickets above the threshold to push to workers
- if (totalTickets >= ticketThreshold) {
-   //Subtract tickets equal to the ticketthreshold amount and also and them to the queue
-   totalTickets -= ticketThreshold;
-   ticketsInQueue += ticketThreshold;
-   //Subtract a worker from the total workers to start working on tickets
-   inactiveWorkers -= 1;
-
-   document.getElementById("TotalWorkerText").innerHTML = inactiveWorkers + "/" + totalWorkers + " workers";
-
-  //If there is a worker missing(working) then start the timer to resolve the ticket
-  if(inactiveWorkers < totalWorkers) {
-        document.getElementById("workerprogress").style.visibility = "visible";
-
-
-        workerInterval = setInterval(resolveTickets, 2000);
-
-  }
- }
-
- generatedTicketBar.setAttribute("value", totalTickets);
- generatedTicketBar.setAttribute("max", totalTicketCap);
- generatedTicketBar.setAttribute("data-label", totalTickets + " tickets");
-
-},1000)
-
-//The workers resolving timer(2 seconds)
-function resolveTickets(){
-
-  if(inactiveWorkers < totalWorkers){
-    inactiveWorkers += 1;
-    totalCash += ticketsInQueue;
+//**Main page**
+//Loop to check the tickets and convert them to queued tickets
+const queueTicketInterval = setInterval(function() {
+  if(totalTickets > 0 && totalTickets < queueTicketThreshold){
+    ticketsInQueue = ticketsInQueue + totalTickets;
+    totalTickets = 0;
+  }else if(totalTickets > 0 && totalTickets >= queueTicketThreshold){
+    ticketsInQueue = ticketsInQueue + totalTickets;
+    totalTickets = totalTickets - queueTicketThreshold;
   }
 
-  if(inactiveWorkers = totalWorkers){
-    document.getElementById("workerprogress").style.visibility = "hidden";
-    clearInterval(workerInterval);
+  refreshticketbar();
+  ticketQueueDisp.innerHTML = ticketsInQueue + " tickets in queue";
+
+}, 3500)
+
+//Loop to check the tickets and convert them to queued tickets
+const resolveTicketInterval = setInterval(function() {
+  if(ticketsInQueue > 0  && ticketsInQueue < resolveTicketThreshold){
+    totalSP = totalSP + Math.ceil(ticketsInQueue / 2);
+    ticketsInQueue = ticketsInQueue - ticketsInQueue;
+  }else if(ticketsInQueue > 0  && ticketsInQueue >= resolveTicketThreshold){
+    totalSP = totalSP + Math.ceil(resolveTicketThreshold / 2);
+    ticketsInQueue = ticketsInQueue - resolveTicketThreshold;
   }
 
+  ticketQueueDisp.innerHTML = ticketsInQueue + " tickets in queue";
+  spValueDisp.innerHTML = totalSP + " SP"
 
-  document.getElementById("TotalWorkerText").innerHTML = inactiveWorkers + "/" + totalWorkers + " workers";
+}, 5000)
+
+//Function for generating tickets via button
+generateTicketBtn.onclick = function(){
+
+  totalTickets = totalTickets + generateTicketPower;
+
+  refreshticketbar();
 
 }
