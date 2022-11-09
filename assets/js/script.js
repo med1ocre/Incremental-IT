@@ -4,60 +4,100 @@ document.body.onkeyup = function(e) {
   if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
 
     //Hide the landing text and make the loading icon visible for 1.5 second
-    landingTextDisp.style.visibility = "hidden";
+    Element.landingTextDisp.style.visibility = "hidden";
     document.getElementById("LandingLoader").style.visibility = "visible";
 
     //Get rid of the loading icon after 1.5 second
     const loadingInterval = setInterval(function() {
-      window.location = "main.html";
+      window.location = "./assets/pages/main.html";
     }, 1500)
   }
 }
 
-//This is to refresh/set the ticket bar to its value so that it displays correctly
-function refreshticketbar(){
-  generatedTicketBar.setAttribute("value", totalTickets);
-  generatedTicketBar.setAttribute("max", totalTicketCap);
-  generatedTicketBar.setAttribute("data-label", totalTickets + " tickets");
+formatWithCommas = function(num, decimal) {
+    var hasDot = false;
+    var base = num.toString();
+    if (base.indexOf("e+") !== -1) {
+    var splittedExponentNum = base.split("e+"),
+        exponent = splittedExponentNum[1],
+        str = '';
+        if (base.indexOf(".") !== -1){
+        base = splittedExponentNum[0].split(".");
+        exponent -= base[1].length;
+        base = base.join("");
+        }
+    while (exponent--) {
+        str = str + '0';
+        }
+        base = base + str;
+    }
+    if (base.indexOf(".") !== -1)
+    {
+        hasDot = true;
+    }
+    if (decimal === 0)
+    {
+        if (base.length <= 3 && !hasDot) return base;
+    }
+    if (typeof (decimal) === "undefined")
+    {
+        decimal = 0;
+    }
+    var leftNum = hasDot ? base.substr(0, base.indexOf(".")) : base;
+    if (decimal === 0) {
+        if (num <= 999) return leftNum;
+        else return leftNum.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    }
+    var dec = hasDot ? base.substr(base.indexOf("."), decimal + 1) : ".";
+    while (dec.length < decimal+1)
+        {
+         dec += "0";
+        }
+        if (num <= 999) return leftNum + dec;
+        else return leftNum.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + dec;
+}
+
+window.onload = function(){
+  UpdateText();
+}
+
+function UpdateText(){
+
+  Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
+  Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
+  Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
 
 }
 
-//**Main page**
-//Loop to check the tickets and convert them to queued tickets
-const queueTicketInterval = setInterval(function() {
-  if(totalTickets > 0 && totalTickets < queueTicketThreshold){
-    ticketsInQueue = ticketsInQueue + totalTickets;
-    totalTickets = 0;
-  }else if(totalTickets > 0 && totalTickets >= queueTicketThreshold){
-    ticketsInQueue = ticketsInQueue + totalTickets;
-    totalTickets = totalTickets - queueTicketThreshold;
-  }
-
-  refreshticketbar();
-  ticketQueueDisp.innerHTML = ticketsInQueue + " tickets in queue";
-
-}, 3500)
-
-//Loop to check the tickets and convert them to queued tickets
-const resolveTicketInterval = setInterval(function() {
-  if(ticketsInQueue > 0  && ticketsInQueue < resolveTicketThreshold){
-    totalSP = totalSP + Math.ceil(ticketsInQueue / 2);
-    ticketsInQueue = ticketsInQueue - ticketsInQueue;
-  }else if(ticketsInQueue > 0  && ticketsInQueue >= resolveTicketThreshold){
-    totalSP = totalSP + Math.ceil(resolveTicketThreshold / 2);
-    ticketsInQueue = ticketsInQueue - resolveTicketThreshold;
-  }
-
-  ticketQueueDisp.innerHTML = ticketsInQueue + " tickets in queue";
-  spValueDisp.innerHTML = totalSP + " SP"
-
-}, 5000)
-
 //Function for generating tickets via button
-generateTicketBtn.onclick = function(){
+Element.generateTicketBtn.onclick = function(){
 
-  totalTickets = totalTickets + generateTicketPower;
+  Tickets.Total += 1;
 
-  refreshticketbar();
+  Tickets.Queued += 1;
+
+  UpdateText();
+
+}
+
+function Selltickets(ticketsDemanded){
+
+  if(Tickets.Queued > 0){
+
+    if(ticketsDemanded > Tickets.Queued){
+
+      Tickets.Queued -= ticketsDemanded;
+
+    }else{
+      
+    }
+
+  }else{
+
+    console.log("No tickets queued!")
+
+  }
+
+  UpdateText();
 
 }

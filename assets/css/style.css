@@ -8,8 +8,8 @@
 }
 
 body {
-    padding: 0;
-    margin: 0;
+    display:block;
+    margin: 8px;
     background: #0B132B;
 }
 
@@ -66,6 +66,53 @@ body {
     transform: rotate(360deg);
   }
 }
+
+div {
+    display: block;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+p.console {
+    font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+    font-size: 12;
+    color: white;
+    margin-top: 0;
+}
+
+p.consoleOld {
+    font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+    font-size: 12;
+    color: grey;
+    margin-bottom: 0;
+}
+
+.pulsate {
+    -webkit-animation: pulsate .5s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    opacity: 0.0;
+}
+
+@keyframes pulsate{
+
+  0% {
+      opacity: 0.0;
+  }
+  50% {
+      opacity: 1.0;
+  }
+  100% {
+      opacity: 0.0;
+  }
+
+}
+
 
 .center {
   justify-content: center;
@@ -127,12 +174,6 @@ body {
   transform: translateY(2px);
 }
 
-#TicketNumberText{
-  color:white;
-  font-size:3em;
-  cursor:default;
-}
-
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -143,42 +184,73 @@ body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+#TicketText{
 
-#GeneratedTicketBar {
-  height: 2em;
-  width: 100%;
-  background-color: #dcdcdc;
-  position: relative;
-  font-weight:bold;
-  float: left;
-  margin-bottom:1em;
+  font-size:1.5rem;
 
 }
-#GeneratedTicketBar:before {
-  content: attr(data-label);
-  font-size: 1em;
-  position: absolute;
-  text-align: center;
-  top: 15%;
-  left: 0;
-  right: 0;
-}
-#GeneratedTicketBar .value {
-  background-color: #05a000;
-  display: inline-block;
-  height: 100%;
+
+#consoleDiv{
+  float:left;
+  background:black;
+  width:100%;
 }
 
-#GeneratedTicketBar::-moz-progress-bar {
-  background: #05a000;
+#topDiv{
+  float:left;
+  width:100%;
 }
 
-#GeneratedTicketBar::-webkit-progress-value {
-  background: #05a000;
+#cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
 }
 
-#GeneratedTicketBar::-webkit-progress-bar {
-  background: #dcdcdc;
+.toolTip {
+    position: relative;
+    display: inline-block;
+}
+
+.toolTip .toolTipText {
+    visibility: hidden;
+    width: 160px;
+    background-color: #c8c8c8;
+    color: #000;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 1;
+    bottom: 75%;
+    left: 50%;
+    margin-left: -19px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+h2 {
+  line-height: 70%;
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+#leftColumn {
+    float: left;
+    width: 275px;
+}
+
+.btn-wrapper{
+
+  text-align:center;
+
 }
 
 .whitetext{

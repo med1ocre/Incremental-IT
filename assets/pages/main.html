@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>HD Incremental | v0.0.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+
+
+</head>
+
+<body>
+
+
+	<div id="page">
+
+		<div id="cover" style="display:none;"></div>
+
+		<div id="consoleDiv">
+			<p class="consoleOld">
+				<span>&nbsp;.&nbsp;</span>
+				<span id="readout5"></span>
+				<br>
+				<span>&nbsp;.&nbsp;</span>
+				<span id="readout4"></span>
+				<br>
+				<span>&nbsp;.&nbsp;</span>
+				<span id="readout3"></span>
+				<br>
+				<span>&nbsp;.&nbsp;</span>
+				<span id="readout2"></span>
+				<br>
+			</p>
+			<p class="console">
+				<span>&nbsp;>&nbsp;</span>
+				<span id="readout1">Welcome to Incremental IT</span>
+				<span id="cursor" class="pulsate">|</span>
+			</p>
+		</div>
+
+		<div id="topDiv">
+			<div class="toolTip">
+				<span id="ticketCountCrunched" class="toolTipText"></span>
+				<h2 class="whitetext">
+					Tickets: <span id="tix">0</span>
+				</h2>
+			</div>
+		</div>
+
+		<div id="leftColumn" class="whitetext">
+			<button id="GenerateTicketButton">
+				Generate Ticket
+			</button>
+			<br>
+			<br>
+			<div id="businessDiv">
+				<b>Business</b>
+				<br>
+				<hr>
+				<p>Available Funds: $ <span id="funds"></span></p>
+				<p>Tickets in Queue: <span id="queuedtickets"></p>
+				<br>
+				<br>
+
+			</div>
+			<div id="workerDiv">
+				<b>Workers</b>
+				<br>
+				<hr>
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script src="../js/variables.js"></script>
+  <script src="../js/script.js"></script>
+
+</body>
+
+</html>
