@@ -60,6 +60,9 @@ formatWithCommas = function(num, decimal) {
 window.onload = function(){
   loadGame();
   UpdateText();
+  if(Marketing.Fliers.Amount >= 1){
+    StartMarketing();
+  }
 }
 
 let saveInterval = window.setInterval(function(){
@@ -77,11 +80,11 @@ let sellInterval = window.setInterval(function(){
 
 let ticketInterval = window.setInterval(function(){
 
-  if(Worker.Technician.Amount >= 1){
+  if(Worker.User.Amount >= 1){
     Createticket();
   }
 
-}, 1000); //1sec
+}, 2000); //2sec
 
 function UpdateText(){
 
@@ -92,6 +95,9 @@ function UpdateText(){
   Element.techniciancostTextDisp.innerHTML = "($" + formatWithCommas(Worker.Technician.Price, 2) + ")";
   Element.analystsTextDisp.innerHTML = formatWithCommas(Worker.Analyst.Amount) + " ";
   Element.analystcostTextDisp.innerHTML = "($" + formatWithCommas(Worker.Analyst.Price, 2) + ")";
+  Element.usersTextDisp.innerHTML = formatWithCommas(Worker.User.Amount) + " ";
+  Element.fliersTextDisp.innerHTML = formatWithCommas(Marketing.Fliers.Amount) + " ";
+  Element.flierscostTextDisp.innerHTML = "($" + formatWithCommas(Marketing.Fliers.Price, 2) + ")";
 
 }
 
@@ -112,7 +118,7 @@ Element.generateTicketBtn.onclick = function(){
 
 function Createticket(){
 
-  let amount = Worker.Technician.Amount;
+  let amount = Worker.User.Amount;
 
   //Create tickets equal to the amount of technicians you have
 
@@ -126,13 +132,15 @@ function Createticket(){
 
 function Sellticket(ticketsDemanded){
 
+  ticketsDemanded = ticketsDemanded + Worker.Technician.Amount;
+
   if(Tickets.Queued > 0){
 
     if(ticketsDemanded <= Tickets.Queued){
 
-      Tickets.Queued -= ticketsDemanded + Worker.Analyst.Amount;
+      Tickets.Queued -= ticketsDemanded;
 
-      Player.Funds += Tickets.Price * ticketsDemanded + Worker.Analyst.Amount;
+      Player.Funds += Tickets.Price * ticketsDemanded;
 
     }else{
 
@@ -168,8 +176,6 @@ function BuyTechnician(){
 
     Player.Funds -= Worker.Technician.Price;
 
-
-
     //increase cost
     Worker.Technician.Price = (Math.pow(1.5,Worker.Technician.Amount)+5);
 
@@ -179,6 +185,7 @@ function BuyTechnician(){
 
   }
 
+  Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
   Element.techniciansTextDisp.innerHTML = formatWithCommas(Worker.Technician.Amount) + " ";
   Element.techniciancostTextDisp.innerHTML = "($" + formatWithCommas(Worker.Technician.Price, 2) + ")";
 
@@ -203,10 +210,67 @@ function BuyAnalyst(){
 
   }
 
+  Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
   Element.analystsTextDisp.innerHTML = formatWithCommas(Worker.Analyst.Amount) + " ";
   Element.analystcostTextDisp.innerHTML = "($" + formatWithCommas(Worker.Analyst.Price, 2) + ")";
 
 }
+
+function StartMarketing(){
+
+  var progress = document.getElementById("fliersprogressbar");
+  var a = 0;
+
+  function update() {
+    a = a == progress.max ? 0 : ++a;
+    progress.value = a;
+
+    if(progress.value == progress.max){
+
+      Worker.User.Amount += Marketing.Fliers.Value;
+
+      Element.usersTextDisp.innerHTML = formatWithCommas(Worker.User.Amount) + " ";
+
+    }
+
+  }
+
+  setInterval(update, 100);
+
+
+}
+
+function BuyFlier(){
+
+  if(Player.Funds >= Marketing.Fliers.Price){
+
+    var progress = document.getElementById("fliersprogressbar");
+
+    Player.Funds -= Marketing.Fliers.Price;
+
+    Marketing.Fliers.Price = (Math.pow(1.5,Marketing.Fliers.Amount)+5);
+
+    progress.max -= 2;
+
+    if(Marketing.Fliers.Amount == 0){
+      StartMarketing();
+    }
+
+    Marketing.Fliers.Amount += 1;
+
+    Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
+    Element.fliersTextDisp.innerHTML = formatWithCommas(Marketing.Fliers.Amount) + " ";
+    Element.flierscostTextDisp.innerHTML = "($" + formatWithCommas(Marketing.Fliers.Price, 2) + ")";
+
+
+  }else{
+
+    console.log("You don't have enough funds!");
+
+  }
+
+}
+
 
 function DisplayMessage(msg){
 
@@ -233,6 +297,9 @@ function loadGame(){
   if(typeof saveGame.Worker !== "undefined"){
     Worker = saveGame.Worker;
   }
+  if(typeof saveGame.Marketing !== "undefined"){
+    Marketing = saveGame.Marketing;
+  }
 }
 
 //function to save our game
@@ -241,7 +308,8 @@ function saveGame(){
     //setting our obects/values
     Player: Player,
     Tickets: Tickets,
-    Worker: Worker
+    Worker: Worker,
+    Marketing: Marketing
   };
   //stringify it for readability
   localStorage.setItem("gameSave", JSON.stringify(gameSave));

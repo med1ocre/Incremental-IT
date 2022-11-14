@@ -9,6 +9,10 @@ let Tickets = {
 
 let Worker = {
 
+  User: {
+    Amount: 0,
+    Price: 5
+  },
   Technician: {
     Amount: 0,
     Price: 5
@@ -18,6 +22,15 @@ let Worker = {
     Price: 5
   }
 
+}
+
+let Marketing = {
+
+  Fliers: {
+    Amount: 0,
+    Price: 5,
+    Value: 1
+  }
 
 }
 
@@ -35,6 +48,9 @@ let Element = {
    techniciancostTextDisp: document.getElementById("techniciancost"),
    analystsTextDisp: document.getElementById("analysts"),
    analystcostTextDisp: document.getElementById("analystcost"),
+   usersTextDisp: document.getElementById("users"),
+   fliersTextDisp: document.getElementById("fliers"),
+   flierscostTextDisp: document.getElementById("flierscost"),
 
    readout1TextDisp: document.getElementById("readout1"),
    readout2TextDisp: document.getElementById("readout2"),
