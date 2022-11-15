@@ -65,6 +65,31 @@ window.onload = function(){
   }
 }
 
+window.setInterval(function(){
+
+  ManageIdeas();
+
+},10)
+
+window.setInterval(function(){
+
+  CalculateKnowledgePoints();
+  Element.knowledgeprogressbarDisp.value = Knowledge.Points;
+  Element.knowledgeprogressbarDisp.max = Knowledge.MaxPoints;
+
+},100)
+
+window.setInterval(function(){
+
+  if(Knowledge.Points == Knowledge.MaxPoints){
+
+    CalculateIQ();
+
+  }
+
+},4000)
+
+
 let saveInterval = window.setInterval(function(){
 
   saveGame();
@@ -86,6 +111,30 @@ let ticketInterval = window.setInterval(function(){
 
 }, 2000); //2sec
 
+function blink(element){
+
+    {
+        var handle = setInterval(function () { toggleVisibility(element)}, 30);
+    }
+
+    function toggleVisibility(element){
+    Global.blinkCounter = Global.blinkCounter+1;
+
+    if (Global.blinkCounter >= 12){
+        clearInterval(handle);
+        Global.blinkCounter = 0;
+        element.style.visibility = "visible";
+    } else {
+        if (element.style.visibility != "hidden"){
+        element.style.visibility = "hidden";
+        } else {
+        element.style.visibility = "visible";
+        }
+      }
+    }
+
+    }
+
 function UpdateText(){
 
   Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
@@ -98,6 +147,13 @@ function UpdateText(){
   Element.usersTextDisp.innerHTML = formatWithCommas(Worker.User.Amount) + " ";
   Element.fliersTextDisp.innerHTML = formatWithCommas(Marketing.Fliers.Amount) + " ";
   Element.flierscostTextDisp.innerHTML = "($" + formatWithCommas(Marketing.Fliers.Price, 2) + ")";
+  Element.spTextDisp.innerHTML = formatWithCommas(Satisfaction.Points);
+  Element.kpTextDisp.innerHTML = formatWithCommas(Knowledge.Points);
+  Element.kpmaxTextDisp.innerHTML = formatWithCommas(Knowledge.MaxPoints);
+  Element.nextspTextDisp.innerHTML = formatWithCommas(Satisfaction.NextPoint);
+  Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
+  Element.knowledgeprogressbarDisp.value = Tickets.Total;
+  Element.knowledgeprogressbarDisp.max = Satisfaction.NextPoint;
 
 }
 
@@ -111,6 +167,8 @@ Element.generateTicketBtn.onclick = function(){
 
   Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
+
+  setSatisfaction();
 
 }
 
@@ -128,11 +186,13 @@ function Createticket(){
   Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
 
+  setSatisfaction();
+
 }
 
 function Sellticket(ticketsDemanded){
 
-  ticketsDemanded = ticketsDemanded + Worker.Technician.Amount;
+  ticketsDemanded = ticketsDemanded + Worker.Technician.Amount + Worker.Technician.Boost;
 
   if(Tickets.Queued > 0){
 
@@ -158,7 +218,7 @@ function Sellticket(ticketsDemanded){
 
   }else{
 
-    console.log("No tickets queued!")
+    //console.log("No tickets queued!")
 
   }
 
@@ -218,14 +278,13 @@ function BuyAnalyst(){
 
 function StartMarketing(){
 
-  var progress = document.getElementById("fliersprogressbar");
   var a = 0;
 
   function update() {
-    a = a == progress.max ? 0 : ++a;
-    progress.value = a;
+    a = a == Element.fliersprogressbarDisp.max ? 0 : ++a;
+    Element.fliersprogressbarDisp.value = a;
 
-    if(progress.value == progress.max){
+    if(Element.fliersprogressbarDisp.value == Element.fliersprogressbarDisp.max){
 
       Worker.User.Amount += Marketing.Fliers.Value;
 
@@ -250,7 +309,7 @@ function BuyFlier(){
 
     Marketing.Fliers.Price = (Math.pow(1.5,Marketing.Fliers.Amount)+5);
 
-    progress.max -= 2;
+    progress.max -= 5;
 
     if(Marketing.Fliers.Amount == 0){
       StartMarketing();
@@ -271,6 +330,45 @@ function BuyFlier(){
 
 }
 
+function setSatisfaction(){
+
+  if(Element.satisfactionprogressbarDisp.value == Element.satisfactionprogressbarDisp.max){
+
+    Satisfaction.Points += 1;
+
+    Satisfaction.NextPoint = Satisfaction.Points * 1000
+
+    Element.spTextDisp.innerHTML = formatWithCommas(Satisfaction.Points);
+    Element.nextspTextDisp.innerHTML = formatWithCommas(Satisfaction.NextPoint);
+
+    setSatisfaction();
+
+  }
+
+}
+
+function CalculateKnowledgePoints(){
+
+  if(Knowledge.Points < Knowledge.MaxPoints){
+
+    Knowledge.Points++
+
+    Element.kpTextDisp.innerHTML = formatWithCommas(Knowledge.Points);
+    Element.kpmaxTextDisp.innerHTML = formatWithCommas(Knowledge.MaxPoints);
+
+  }else{
+    //console.log("You hit the max");
+  }
+
+}
+
+function CalculateIQ(){
+
+  Knowledge.Iq++
+
+  Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
+
+}
 
 function DisplayMessage(msg){
 
@@ -282,6 +380,60 @@ function DisplayMessage(msg){
 
 
 }
+
+
+function ManageIdeas(){
+    for(var i = 0; i < ideas.length; i++){
+        if (ideas[i].trigger() && (ideas[i].uses > 0)){
+            DisplayIdea(ideas[i]);
+            ideas[i].uses = ideas[i].uses - 1;
+            activeIdeas.push(ideas[i]);
+
+        }
+
+    }
+
+
+    for(var i = 0; i < activeIdeas.length; i++){
+        if (activeIdeas[i].cost()){
+            activeIdeas[i].element.disabled = false;
+        } else {
+            activeIdeas[i].element.disabled = true;
+        }
+    }
+}
+
+function DisplayIdea(idea){
+
+  idea.element = document.createElement("button");
+  idea.element.setAttribute("id", idea.id);
+
+  idea.element.onclick = function(){idea.effect()};
+
+  idea.element.setAttribute("class", "projectButton");
+  ideaListTopElement.appendChild(idea.element, ideaListTopElement.firstChild);
+
+  var span = document.createElement("span");
+  span.style.fontWeight = "bold";
+  idea.element.appendChild(span);
+
+  var title = document.createTextNode(idea.title);
+  span.appendChild(title);
+
+  var cost = document.createTextNode(idea.pricetag);
+  idea.element.appendChild(cost);
+
+  var div = document.createElement("div");
+  idea.element.appendChild(div);
+
+  var description = document.createTextNode(idea.description);
+  idea.element.appendChild(description);
+
+  blink(idea.element);
+
+}
+
+
 
 
 function loadGame(){
@@ -300,6 +452,9 @@ function loadGame(){
   if(typeof saveGame.Marketing !== "undefined"){
     Marketing = saveGame.Marketing;
   }
+  if(typeof saveGame.Satisfaction !== "undefined"){
+    Satisfaction = saveGame.Satisfaction;
+  }
 }
 
 //function to save our game
@@ -309,7 +464,8 @@ function saveGame(){
     Player: Player,
     Tickets: Tickets,
     Worker: Worker,
-    Marketing: Marketing
+    Marketing: Marketing,
+    Satisfaction: Satisfaction
   };
   //stringify it for readability
   localStorage.setItem("gameSave", JSON.stringify(gameSave));
@@ -318,4 +474,6 @@ function saveGame(){
 function reset() {
     localStorage.removeItem("gameSave");
     location.reload();
+
+
 }

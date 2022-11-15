@@ -99,7 +99,34 @@ body {
 }
 
 .marketingprogress {
-    background-color: #6ab446;
+    background-color: #BB890E;
+}
+
+/* For Chrome or Safari */
+.knowledgeprogress::-webkit-progress-bar {
+    background-color: #eeeeee;
+}
+
+.knowledgeprogress::-webkit-progress-value {
+    background-color: #BB890E !important;
+}
+
+/* For Firefox */
+.knowledgeprogress {
+    background-color: #eee;
+}
+
+.knowledgeprogress::-moz-progress-bar {
+    background-color: #BB890E !important;
+}
+
+/* For IE10 */
+.knowledgeprogress {
+    background-color: #eee;
+}
+
+.knowledgeprogress {
+    background-color: #BB890E;
 }
 
 hr {
@@ -303,6 +330,12 @@ h2 {
 #leftColumn {
     float: left;
     width: 275px;
+}
+
+#middleColumn {
+    float: left;
+    width: 275px;
+    margin-left:10px;
 }
 
 .btn-wrapper{

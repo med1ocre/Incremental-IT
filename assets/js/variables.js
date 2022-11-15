@@ -15,11 +15,12 @@ let Worker = {
   },
   Technician: {
     Amount: 0,
-    Price: 5
+    Price: 5,
+    Boost: 1
   },
   Analyst: {
     Amount: 0,
-    Price: 5
+    Price: 50
   }
 
 }
@@ -34,8 +35,29 @@ let Marketing = {
 
 }
 
+let Satisfaction = {
+
+  Points: 0,
+  NextPoint: 1000
+
+}
+
+let Knowledge = {
+
+  Points: 0,
+  MaxPoints: 1000,
+  Iq: 0
+
+}
+
 let Player = {
   Funds: 0
+}
+
+let Global = {
+
+  blinkCounter: 0
+
 }
 
 let Element = {
@@ -43,6 +65,11 @@ let Element = {
    landingTextDisp: document.getElementById("LandingTextid"),
    ticketTextDisp: document.getElementById("tix"),
    fundsTextDisp: document.getElementById("funds"),
+   spTextDisp: document.getElementById("sp"),
+   kpTextDisp: document.getElementById("kp"),
+   iqTextDisp: document.getElementById("iq"),
+   kpmaxTextDisp: document.getElementById("kpmax"),
+   nextspTextDisp: document.getElementById("nextsp"),
    queuedticketsTextDisp: document.getElementById("queuedtickets"),
    techniciansTextDisp: document.getElementById("technicians"),
    techniciancostTextDisp: document.getElementById("techniciancost"),
@@ -51,6 +78,9 @@ let Element = {
    usersTextDisp: document.getElementById("users"),
    fliersTextDisp: document.getElementById("fliers"),
    flierscostTextDisp: document.getElementById("flierscost"),
+
+   fliersprogressbarDisp: document.getElementById("fliersprogressbar"),
+   knowledgeprogressbarDisp: document.getElementById("knowledgeprogressbar"),
 
    readout1TextDisp: document.getElementById("readout1"),
    readout2TextDisp: document.getElementById("readout2"),
