@@ -1,4 +1,4 @@
-//**Landing page**
+//**Landing page** 
 //Press spacebar to continue function
 document.body.onkeyup = function(e) {
   if (e.key == " " || e.code == "Space" || e.keyCode == 32) {

@@ -75,6 +75,10 @@ body {
 
 }
 
+::-moz-progress-bar {
+  background-color: white;
+}
+
 /* For Chrome or Safari */
 .marketingprogress::-webkit-progress-bar {
     background-color: #eeeeee;
@@ -96,10 +100,6 @@ body {
 /* For IE10 */
 .marketingprogress {
     background-color: #eee;
-}
-
-.marketingprogress {
-    background-color: #BB890E;
 }
 
 /* For Chrome or Safari */
@@ -125,9 +125,6 @@ body {
     background-color: #eee;
 }
 
-.knowledgeprogress {
-    background-color: #BB890E;
-}
 
 hr {
   border: 0;
