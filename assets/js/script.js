@@ -60,6 +60,7 @@ formatWithCommas = function(num, decimal) {
 window.onload = function(){
   loadGame();
   UpdateText();
+  UpdateButtons();
   if(Marketing.Fliers.Amount >= 1){
     StartMarketing();
   }
@@ -68,20 +69,24 @@ window.onload = function(){
 window.setInterval(function(){
 
   ManageIdeas();
+  UpdateButtons();
 
 },10)
 
 window.setInterval(function(){
 
-  CalculateKnowledgePoints();
+  if(Flag.KnowledgeBar == 1){
+    CalculateKnowledgePoints();
+  }
+
   Element.knowledgeprogressbarDisp.value = Knowledge.Points;
   Element.knowledgeprogressbarDisp.max = Knowledge.MaxPoints;
 
-},100)
+},Knowledge.Speed)
 
 window.setInterval(function(){
 
-  if(Knowledge.Points == Knowledge.MaxPoints){
+  if(Knowledge.Points == Knowledge.MaxPoints && Flag.Iq == 1){
 
     CalculateIQ();
 
@@ -154,6 +159,63 @@ function UpdateText(){
   Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
   Element.knowledgeprogressbarDisp.value = Tickets.Total;
   Element.knowledgeprogressbarDisp.max = Satisfaction.NextPoint;
+
+}
+
+function UpdateButtons(){
+
+  if(Satisfaction.Points<=Knowledge.Upgrade.Cap + Knowledge.Upgrade.Spd){
+
+    Element.KPCapBtn.disabled = true;
+    Element.KPSpdBtn.disabled = true;
+
+  }else{
+
+    Element.KPCapBtn.disabled = false;
+    Element.KPSpdBtn.disabled = false;
+
+  }
+
+  if(Flag.Analyst == 0){
+
+    Element.analystdivDisp.style.display = "none";
+
+  }else{
+
+    Element.analystdivDisp.style.display = "block";
+
+  }
+
+  if(Flag.Satisfaction == 0){
+
+    Element.satisfactiondivDisp.style.display = "none";
+
+    }else{
+
+    Element.satisfactiondivDisp.style.display = "block";
+
+    }
+
+
+  if(Player.Funds >= 15){
+
+    Flag.Knowledge = 1;
+
+  }
+
+
+  if(Flag.Knowledge == 0){
+
+    Element.knowledgedivDisp.style.display = "none";
+
+  }else{
+
+    Element.knowledgedivDisp.style.display = "block";
+
+  }
+
+
+
 
 }
 
@@ -309,7 +371,7 @@ function BuyFlier(){
 
     Marketing.Fliers.Price = (Math.pow(1.5,Marketing.Fliers.Amount)+5);
 
-    progress.max -= 5;
+    progress.max -= 10;
 
     if(Marketing.Fliers.Amount == 0){
       StartMarketing();
@@ -332,7 +394,7 @@ function BuyFlier(){
 
 function setSatisfaction(){
 
-  if(Element.satisfactionprogressbarDisp.value == Element.satisfactionprogressbarDisp.max){
+  if(Tickets.Total >= Satisfaction.NextPoint){
 
     Satisfaction.Points += 1;
 
@@ -340,8 +402,6 @@ function setSatisfaction(){
 
     Element.spTextDisp.innerHTML = formatWithCommas(Satisfaction.Points);
     Element.nextspTextDisp.innerHTML = formatWithCommas(Satisfaction.NextPoint);
-
-    setSatisfaction();
 
   }
 
@@ -369,6 +429,34 @@ function CalculateIQ(){
   Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
 
 }
+
+
+
+function BuyKPCap(){
+
+  if(Satisfaction.Points>0){
+
+    Knowledge.Upgrade.Cap += 1;
+    Knowledge.MaxPoints += 1000;
+
+    Element.KPCap.innerHTML = Knowledge.Upgrade.Cap;
+
+  }
+
+}
+
+function BuyKPSpd(){
+
+  if(Satisfaction.Points>0){
+
+    Knowledge.Upgrade.Spd += 1;
+    Knowledge.Speed -= 20;
+
+    Element.KPSpd.innerHTML = Knowledge.Upgrade.Spd;
+  }
+
+}
+
 
 function DisplayMessage(msg){
 
@@ -455,6 +543,12 @@ function loadGame(){
   if(typeof saveGame.Satisfaction !== "undefined"){
     Satisfaction = saveGame.Satisfaction;
   }
+  if(typeof saveGame.Knowledge !== "undefined"){
+    Knowledge = saveGame.Knowledge;
+  }
+  if(typeof saveGame.Flag !== "undefined"){
+    Flag = saveGame.Flag;
+  }
 }
 
 //function to save our game
@@ -465,7 +559,9 @@ function saveGame(){
     Tickets: Tickets,
     Worker: Worker,
     Marketing: Marketing,
-    Satisfaction: Satisfaction
+    Satisfaction: Satisfaction,
+    Knowledge: Knowledge,
+    Flag: Flag,
   };
   //stringify it for readability
   localStorage.setItem("gameSave", JSON.stringify(gameSave));

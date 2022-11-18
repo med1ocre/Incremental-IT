@@ -79,6 +79,42 @@
 				<br>
 
 			</div>
+			<div id="workerDiv">
+				<b>Workers</b>
+				<br>
+				<hr>
+				<p class="workertext">
+					<div class="techniciandiv">
+						<button id="AddTechnicianBtn" class="Button2" onclick="BuyTechnician();">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+							</svg>
+						</button>
+						<button id="RemoveTechnicianBtn" class="Button2">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+								<path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+							</svg>
+						</button>
+						Technician: <span id="technicians"></span><span id="techniciancost"></span>
+						<br>
+					</div>
+					<div id="analystdiv" style="display:none;">
+						<button id="AddAnalystBtn" class="Button2" onclick="BuyAnalyst();" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+							</svg>
+						</button>
+						<button id="RemoveAnalystBtn" class="Button2">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+								<path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+							</svg>
+						</button>
+						Analyst: <span id="analysts"></span><span id="analystcost"></span>
+					</div>
+				</p>
+			</div>
+			<br>
+
 			<div id="marketingDiv">
 				<b>Marketing</b>
 				<br>
@@ -101,44 +137,11 @@
 				<br>
 
 			</div>
-			<div id="workerDiv">
-				<b>Workers</b>
-				<br>
-				<hr>
-				<p class="workertext">
 
-					<button id="AddTechnicianBtn" class="Button2" onclick="BuyTechnician();">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-						  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-						</svg>
-					</button>
-					<button id="RemoveTechnicianBtn" class="Button2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-						  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-						</svg>
-					</button>
-
-					Technician: <span id="technicians"></span><span id="techniciancost"></span>
-					<br>
-					<button id="AddAnalystBtn" class="Button2" onclick="BuyAnalyst();" disabled>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-						  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-						</svg>
-					</button>
-					<button id="RemoveAnalystBtn" class="Button2" disabled>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-						  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-						</svg>
-					</button>
-					Analyst: <span id="analysts"></span><span id="analystcost"></span>
-
-				</p>
-
-			</div>
 		</div>
 
 		<div id="middleColumn" class="whitetext">
-			<div id="satisfactionDiv" style="">
+			<div id="satisfactionDiv" style="display:none;">
 				<br>
 				<br>
 				<b>Satisfaction</b>
@@ -150,6 +153,12 @@
 					<br>
 					Next SP at: <span id="nextsp"></span> tickets
 					<br>
+					<button id="KPCapButton" class="Button2" onclick="BuyKPCap()">
+						+ KP Cap (<span id="kpcap">0</span>)
+					</button>
+					<button id="KPSpdButton" class="Button2" onclick="BuyKPSpd()">
+						+ KP Spd (<span id="kpspd">0</span>)
+					</button>
 					<br>
 					<progress value="0" max="1000" class="knowledgeprogress" style="width: 100%;" id="knowledgeprogressbar"></progress>
 					<br>
@@ -163,7 +172,7 @@
 			</div>
 			<br>
 
-			<div id="knowledgeDiv">
+			<div id="knowledgeDiv" style="display:none;">
 				<br>
 				<b>Knowledge</b>
 				<br>
