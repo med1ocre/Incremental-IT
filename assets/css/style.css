@@ -68,6 +68,22 @@ body {
   }
 }
 
+.infoDiv {
+
+    top: 8;
+    right: 8;
+    background-color: white;
+    z-index: 1;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-align: right;
+    float:right;
+}
+
 .row1{
 
   display:flex;
