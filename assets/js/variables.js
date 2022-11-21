@@ -4,7 +4,8 @@ let Tickets = {
   Queued: 0,
   SellCount: 1,
   Price: 0.25,
-  PerSec: 0
+  PerSec: 0,
+  Speed: 2000
 }
 
 let Worker = {

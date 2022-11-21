@@ -1,4 +1,4 @@
-//**Landing page** 
+//**Landing page**
 //Press spacebar to continue function
 document.body.onkeyup = function(e) {
   if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
@@ -106,7 +106,7 @@ let sellInterval = window.setInterval(function(){
 
   Sellticket(Tickets.SellCount);
 
-}, 2000); //2sec
+}, Tickets.Speed);
 
 let ticketInterval = window.setInterval(function(){
 
