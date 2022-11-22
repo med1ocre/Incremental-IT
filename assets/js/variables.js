@@ -22,7 +22,7 @@ let Worker = {
   },
   Analyst: {
     Amount: 0,
-    Price: 100,
+    Price: 15,
     SellCount: 0
   },
   Support: {

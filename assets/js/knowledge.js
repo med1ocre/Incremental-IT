@@ -61,18 +61,18 @@ var idea3 = {
 
   id: "ideaButton3",
   title: "Not Enough",
-  pricetag: " (500 KP)",
+  pricetag: " ($10.00)",
   description: "Unlock Analysts and complete tickets faster!",
   uses: 1,
-  trigger: function(){return Knowledge.Points >= 500},
-  cost: function(){return Knowledge.Points >= 500},
+  trigger: function(){return Player.Funds >= 5},
+  cost: function(){return Player.Funds >= 10},
   flag: 0,
   element: null,
   effect: function(){
 
     idea3.flag = 1;
-    DisplayMessage("You have unlocked analysts! Buy them to complete tickets faster! ");
-    Knowledge.Points -= 500;
+    DisplayMessage("You have unlocked analysts!");
+    Player.Funds -= 10
     Flag.Analyst = 1
     idea3.element.parentNode.removeChild(idea3.element);
     var index = activeIdeas.indexOf(idea3);
@@ -168,30 +168,3 @@ var idea6 = {
 }
 
 ideas.push(idea6);
-
-var idea7 = {
-
-  id: "ideaButton7",
-  title: "Improved Technicians",
-  pricetag: " ($35.00)",
-  description: "Technicians will speed up there work by 10%!",
-  uses: 1,
-  trigger: function(){return Player.Funds >= 10},
-  cost: function(){return Player.Funds >= 35},
-  flag: 0,
-  element: null,
-  effect: function(){
-
-    idea7.flag = 1;
-    DisplayMessage("Technicians will now work 10% faster!");
-    Player.Funds -= 35;
-    idea7.element.parentNode.removeChild(idea7.element);
-    var index = activeIdeas.indexOf(idea7);
-    activeIdeas.splice(index,1);
-
-  }
-
-
-}
-
-ideas.push(idea7);

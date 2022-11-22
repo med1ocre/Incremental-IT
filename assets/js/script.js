@@ -214,7 +214,7 @@ function UpdateButtons(){
     }
 
 
-  if(Player.Funds >= 15){
+  if(Player.Funds >= 5){
 
     Flag.Knowledge = 1;
 
@@ -364,7 +364,7 @@ function BuyAnalyst(){
 
 
     //increase cost
-    Worker.Analyst.Price = (Math.pow(1.15,Worker.Analyst.Amount)+100);
+    Worker.Analyst.Price = (Math.pow(1.15,Worker.Analyst.Amount)+15);
 
   }else{
 
@@ -535,6 +535,7 @@ function ManageIdeas(){
     for(var i = 0; i < activeIdeas.length; i++){
         if (activeIdeas[i].cost()){
             activeIdeas[i].element.disabled = false;
+            activeIdeas[i].element.style.backgroundColor = "#0B375D";
 
         } else {
             activeIdeas[i].element.disabled = true;
