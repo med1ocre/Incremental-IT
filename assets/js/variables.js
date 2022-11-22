@@ -13,6 +13,7 @@ let Worker = {
 
   User: {
     Amount: 0,
+    Speed: 5000
   },
   Technician: {
     Amount: 0,
@@ -21,32 +22,32 @@ let Worker = {
   },
   Analyst: {
     Amount: 0,
-    Price: 25,
+    Price: 100,
     SellCount: 0
   },
   Support: {
     Amount: 0,
-    Price: 100,
+    Price: 500,
   },
   NetAdmin: {
     Amount: 0,
-    Price: 250,
+    Price: 3000,
   },
   SysAdmin: {
     Amount: 0,
-    Price: 500,
+    Price: 10000,
   },
   JrDev: {
     Amount: 0,
-    Price: 1500,
+    Price: 40000,
   },
   SrDev: {
     Amount: 0,
-    Price: 5000,
+    Price: 200000,
   },
   DatabaseAdmin: {
     Amount: 0,
-    Price: 10000,
+    Price: 1666666,
   },
 
 }
@@ -97,7 +98,8 @@ let Flag = {
   Satisfaction: 0,
   Knowledge: 0,
   KnowledgeBar: 0,
-  Os: 0
+  Os: 0,
+  Programming: 0
 
 }
 
@@ -164,6 +166,7 @@ let Element = {
    analystdivDisp: document.getElementById("analystdiv"),
    satisfactiondivDisp: document.getElementById("satisfactionDiv"),
    knowledgedivDisp: document.getElementById("knowledgeDiv"),
+   programmingDivDisp: document.getElementById("programmingDiv"),
 
    fliersprogressbarDisp: document.getElementById("fliersprogressbar"),
    knowledgeprogressbarDisp: document.getElementById("knowledgeprogressbar"),

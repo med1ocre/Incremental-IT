@@ -57,6 +57,22 @@ formatWithCommas = function(num, decimal) {
         else return leftNum.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + dec;
 }
 
+function nFormatter(num) {
+     if (num >= 1000000000000) {
+        return (num / 1000000000000).toFixed(1).replace(/\.0$/, '') + 'T';
+     }
+     if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+     }
+     if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+     }
+     if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+     }
+     return num;
+}
+
 window.onload = function(){
   loadGame();
   UpdateText();
@@ -114,7 +130,7 @@ let ticketInterval = window.setInterval(function(){
     Createticket();
   }
 
-}, 2000); //2sec
+}, Worker.User.Speed);
 
 function blink(element){
 
@@ -142,7 +158,7 @@ function blink(element){
 
 function UpdateText(){
 
-  Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
+  Element.ticketTextDisp.innerHTML = nFormatter(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
   Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
   Element.techniciansTextDisp.innerHTML = formatWithCommas(Worker.Technician.Amount) + " ";
@@ -215,7 +231,7 @@ function UpdateButtons(){
 
   }
 
-  if(Flag.Os == 0){
+  if(Flag.Os == 0 && Flag.Programming == 1){
 
     Element.buildosBtn.style.visibility = "visible";
 
@@ -225,6 +241,15 @@ function UpdateButtons(){
 
   }
 
+  if(Flag.Programming == 0){
+
+    Element.programmingDivDisp.style.display = "none";
+
+  }else{
+
+    Element.programmingDivDisp.style.display = "block";
+
+  }
 
 
 
@@ -238,7 +263,7 @@ Element.generateTicketBtn.onclick = function(){
 
   Tickets.Queued += 1;
 
-  Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
+  Element.ticketTextDisp.innerHTML = nFormatter(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
 
   setSatisfaction();
@@ -256,7 +281,7 @@ function Createticket(){
   Tickets.Total += amount;
   Tickets.Queued += amount;
 
-  Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
+  Element.ticketTextDisp.innerHTML = nFormatter(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
 
   setSatisfaction();
@@ -295,7 +320,7 @@ function Sellticket(ticketsDemanded){
 
   }
 
-  Element.ticketTextDisp.innerHTML = formatWithCommas(Tickets.Total);
+  Element.ticketTextDisp.innerHTML = nFormatter(Tickets.Total);
   Element.queuedticketsTextDisp.innerHTML = formatWithCommas(Tickets.Queued);
   Element.fundsTextDisp.innerHTML = formatWithCommas(Player.Funds, 2);
 
@@ -307,12 +332,12 @@ function BuyTechnician(){
 
     Worker.Technician.Amount += 1;
 
-    Worker.Technician.SellCount += 1;
+    Worker.Technician.SellCount += 0.1;
 
     Player.Funds -= Worker.Technician.Price;
 
     //increase cost
-    Worker.Technician.Price = (Math.pow(1.5,Worker.Technician.Amount)+5);
+    Worker.Technician.Price = (Math.pow(1.15,Worker.Technician.Amount)+5);
 
   }else{
 
@@ -333,13 +358,13 @@ function BuyAnalyst(){
 
     Worker.Analyst.Amount += 1;
 
-    Worker.Analyst.SellCount += 5;
+    Worker.Analyst.SellCount += 0.5;
 
     Player.Funds -= Worker.Analyst.Price;
 
 
     //increase cost
-    Worker.Analyst.Price = (Math.pow(1.5,Worker.Analyst.Amount)+25);
+    Worker.Analyst.Price = (Math.pow(1.15,Worker.Analyst.Amount)+100);
 
   }else{
 
@@ -577,6 +602,9 @@ function loadGame(){
   if(typeof saveGame.Flag !== "undefined"){
     Flag = saveGame.Flag;
   }
+  if(typeof saveGame.Os !== "undefined"){
+    Os = saveGame.Os;
+  }
 }
 
 //function to save our game
@@ -590,6 +618,7 @@ function saveGame(){
     Satisfaction: Satisfaction,
     Knowledge: Knowledge,
     Flag: Flag,
+    Os: Os
   };
   //stringify it for readability
   localStorage.setItem("gameSave", JSON.stringify(gameSave));
