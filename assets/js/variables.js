@@ -5,24 +5,49 @@ let Tickets = {
   SellCount: 1,
   Price: 0.25,
   PerSec: 0,
-  Speed: 2000
+  Speed: 2000,
+  Boost: 0
 }
 
 let Worker = {
 
   User: {
     Amount: 0,
-    Price: 5
   },
   Technician: {
     Amount: 0,
     Price: 5,
-    Boost: 0
+    SellCount: 0
   },
   Analyst: {
     Amount: 0,
-    Price: 50
-  }
+    Price: 25,
+    SellCount: 0
+  },
+  Support: {
+    Amount: 0,
+    Price: 100,
+  },
+  NetAdmin: {
+    Amount: 0,
+    Price: 250,
+  },
+  SysAdmin: {
+    Amount: 0,
+    Price: 500,
+  },
+  JrDev: {
+    Amount: 0,
+    Price: 1500,
+  },
+  SrDev: {
+    Amount: 0,
+    Price: 5000,
+  },
+  DatabaseAdmin: {
+    Amount: 0,
+    Price: 10000,
+  },
 
 }
 
@@ -63,9 +88,16 @@ let Flag = {
 
   Iq: 0,
   Analyst: 0,
+  Support:0,
+  NetAdmin:0,
+  SysAdmin:0,
+  JrDev:0,
+  SrDev:0,
+  DatabaseAdmin:0,
   Satisfaction: 0,
   Knowledge: 0,
-  KnowledgeBar: 0
+  KnowledgeBar: 0,
+  Os: 0
 
 }
 
@@ -79,10 +111,37 @@ let Global = {
 
 }
 
+let Os = {
+
+  WindowsXP:{
+
+  },
+
+  WindowsVista:{
+
+  },
+
+  Windows7:{
+
+  },
+
+  Windows8:{
+
+  },
+
+  Windows10:{
+
+  },
+
+  ActiveOs: "none"
+
+}
+
 let Element = {
    generateTicketBtn: document.getElementById("GenerateTicketButton"),
    KPCapBtn: document.getElementById("KPCapButton"),
    KPSpdBtn: document.getElementById("KPSpdButton"),
+   buildosBtn: document.getElementById("buildosBtn"),
    KPCap: document.getElementById("kpcap"),
    KPSpd: document.getElementById("kpspd"),
    landingTextDisp: document.getElementById("LandingTextid"),
@@ -91,6 +150,7 @@ let Element = {
    spTextDisp: document.getElementById("sp"),
    kpTextDisp: document.getElementById("kp"),
    iqTextDisp: document.getElementById("iq"),
+   osTextDisp: document.getElementById("os"),
    kpmaxTextDisp: document.getElementById("kpmax"),
    nextspTextDisp: document.getElementById("nextsp"),
    queuedticketsTextDisp: document.getElementById("queuedtickets"),

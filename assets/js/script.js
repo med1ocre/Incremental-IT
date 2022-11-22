@@ -157,6 +157,7 @@ function UpdateText(){
   Element.kpmaxTextDisp.innerHTML = formatWithCommas(Knowledge.MaxPoints);
   Element.nextspTextDisp.innerHTML = formatWithCommas(Satisfaction.NextPoint);
   Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
+  Element.osTextDisp.innerHTML = Os.ActiveOs;
   Element.knowledgeprogressbarDisp.value = Tickets.Total;
   Element.knowledgeprogressbarDisp.max = Satisfaction.NextPoint;
 
@@ -214,6 +215,16 @@ function UpdateButtons(){
 
   }
 
+  if(Flag.Os == 0){
+
+    Element.buildosBtn.style.visibility = "visible";
+
+  }else{
+
+    Element.buildosBtn.style.visibility = "hidden";
+
+  }
+
 
 
 
@@ -254,7 +265,7 @@ function Createticket(){
 
 function Sellticket(ticketsDemanded){
 
-  ticketsDemanded = ticketsDemanded + Worker.Technician.Amount + Worker.Technician.Boost;
+  ticketsDemanded = ticketsDemanded + Worker.Technician.SellCount + Worker.Analyst.SellCount + Tickets.Boost;
 
   if(Tickets.Queued > 0){
 
@@ -296,6 +307,8 @@ function BuyTechnician(){
 
     Worker.Technician.Amount += 1;
 
+    Worker.Technician.SellCount += 1;
+
     Player.Funds -= Worker.Technician.Price;
 
     //increase cost
@@ -320,11 +333,13 @@ function BuyAnalyst(){
 
     Worker.Analyst.Amount += 1;
 
+    Worker.Analyst.SellCount += 5;
+
     Player.Funds -= Worker.Analyst.Price;
 
 
     //increase cost
-    Worker.Analyst.Price = (Math.pow(1.5,Worker.Analyst.Amount)+5);
+    Worker.Analyst.Price = (Math.pow(1.5,Worker.Analyst.Amount)+25);
 
   }else{
 
@@ -457,6 +472,16 @@ function BuyKPSpd(){
 
 }
 
+function BuildOs(){
+
+  Flag.Os = 1;
+
+  Os.ActiveOs = "Windows XP";
+
+  Element.osTextDisp.innerHTML = Os.ActiveOs;
+
+}
+
 
 function DisplayMessage(msg){
 
@@ -485,8 +510,11 @@ function ManageIdeas(){
     for(var i = 0; i < activeIdeas.length; i++){
         if (activeIdeas[i].cost()){
             activeIdeas[i].element.disabled = false;
+
         } else {
             activeIdeas[i].element.disabled = true;
+            activeIdeas[i].element.style.backgroundColor = "gray";
+            activeIdeas[i].element.style.border = "2px solid black";
         }
     }
 }
@@ -565,6 +593,9 @@ function saveGame(){
   };
   //stringify it for readability
   localStorage.setItem("gameSave", JSON.stringify(gameSave));
+
+  DisplayMessage("Game Saved!");
+
 }
 
 function reset() {

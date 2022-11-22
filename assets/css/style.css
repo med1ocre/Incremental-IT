@@ -72,7 +72,6 @@ body {
 
     top: 8;
     right: 8;
-    background-color: white;
     z-index: 1;
     padding-left: 5px;
     padding-right: 5px;
@@ -101,7 +100,7 @@ body {
 }
 
 .marketingprogress::-webkit-progress-value {
-    background-color: #6ab446 !important;
+    background-color: #0B375D !important;
 }
 
 /* For Firefox */
@@ -110,7 +109,7 @@ body {
 }
 
 .marketingprogress::-moz-progress-bar {
-    background-color: #6ab446 !important;
+    background-color: #0B375D !important;
 }
 
 /* For IE10 */
@@ -138,6 +137,29 @@ body {
 
 /* For IE10 */
 .knowledgeprogress {
+    background-color: #eee;
+}
+
+/* For Chrome or Safari */
+.buildosprogress::-webkit-progress-bar {
+    background-color: #eeeeee;
+}
+
+.buildosprogress::-webkit-progress-value {
+    background-color: #BB890E !important;
+}
+
+/* For Firefox */
+.buildosprogress {
+    background-color: #eee;
+}
+
+.buildosprogress::-moz-progress-bar {
+    background-color: #BB890E !important;
+}
+
+/* For IE10 */
+.buildosprogress {
     background-color: #eee;
 }
 
@@ -211,6 +233,15 @@ p.consoleOld {
 	text-align: center;
   width:100%;
   height:50%;
+}
+
+.projectButton{
+
+  background-color: #0B375D;
+  color:white;
+  margin-top:1px;
+  margin-bottom:1px;
+
 }
 
 .Button1 {
@@ -349,6 +380,19 @@ h2 {
     float: left;
     width: 275px;
     margin-left:10px;
+}
+
+#rightColumn {
+    float: left;
+    width: 275px;
+    margin-left:10px;
+}
+
+#buildosBtn{
+
+  border-radius:30%;
+  font-size: 0.8rem
+
 }
 
 .btn-wrapper{

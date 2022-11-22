@@ -23,6 +23,8 @@
 
 		<div id="consoleDiv">
 			<div class="infoDiv">
+				<a href="#" onclick="saveGame()">Save Game</a>
+				<br>
 				<a href="#">Settings</a>
 				<br>
 				<a href="#">Help</a>
@@ -103,11 +105,6 @@
 								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
 							</svg>
 						</button>
-						<button id="RemoveTechnicianBtn" class="Button2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-								<path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-							</svg>
-						</button>
 						Technician: <span id="technicians"></span><span id="techniciancost">($5.00)</span>
 						<br>
 					</div>
@@ -117,12 +114,15 @@
 								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
 							</svg>
 						</button>
-						<button id="RemoveAnalystBtn" class="Button2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-								<path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+						Analyst: <span id="analysts"></span><span id="analystcost">($25.00)</span>
+					</div>
+					<div id="supportdiv" style="display:none;">
+						<button id="AddSupportBtn" class="Button2" onclick="" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
 							</svg>
 						</button>
-						Analyst: <span id="analysts"></span><span id="analystcost">($50.00)</span>
+						Support: <span id="supports"></span><span id="supportcost">($100.00)</span>
 					</div>
 				</p>
 			</div>
@@ -196,6 +196,26 @@
 			</div>
 
 		</div>
+
+		<div id="rightColumn" class="whitetext">
+
+			<div id="programmingDiv" style="">
+				<br>
+				<br>
+				<b>Programming</b>
+				<br>
+				<hr>
+				<p class="programmingtext">
+
+					Current OS: <span id="os"></span> <button id="buildosBtn" onclick="BuildOs();">Build</button> 
+
+
+				</p>
+
+			</div>
+
+		</div>
+
 
 	</div>
 
