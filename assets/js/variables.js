@@ -13,7 +13,8 @@ let Worker = {
 
   User: {
     Amount: 0,
-    Speed: 5000
+    Speed: 5000,
+    Max: 10
   },
   Technician: {
     Amount: 0,
@@ -22,7 +23,7 @@ let Worker = {
   },
   Analyst: {
     Amount: 0,
-    Price: 15,
+    Price: 10,
     SellCount: 0
   },
   Support: {
@@ -146,6 +147,7 @@ let Element = {
    buildosBtn: document.getElementById("buildosBtn"),
    KPCap: document.getElementById("kpcap"),
    KPSpd: document.getElementById("kpspd"),
+   maxusersTextDisp: document.getElementById("maxusers"),
    landingTextDisp: document.getElementById("LandingTextid"),
    ticketTextDisp: document.getElementById("tix"),
    fundsTextDisp: document.getElementById("funds"),

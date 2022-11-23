@@ -174,6 +174,7 @@ function UpdateText(){
   Element.nextspTextDisp.innerHTML = formatWithCommas(Satisfaction.NextPoint);
   Element.iqTextDisp.innerHTML = formatWithCommas(Knowledge.Iq);
   Element.osTextDisp.innerHTML = Os.ActiveOs;
+  Element.maxusersTextDisp.innerHTML = Worker.User.Max;
   Element.knowledgeprogressbarDisp.value = Tickets.Total;
   Element.knowledgeprogressbarDisp.max = Satisfaction.NextPoint;
 
@@ -364,7 +365,7 @@ function BuyAnalyst(){
 
 
     //increase cost
-    Worker.Analyst.Price = (Math.pow(1.15,Worker.Analyst.Amount)+15);
+    Worker.Analyst.Price = (Math.pow(1.15,Worker.Analyst.Amount)+10);
 
   }else{
 
@@ -388,7 +389,11 @@ function StartMarketing(){
 
     if(Element.fliersprogressbarDisp.value == Element.fliersprogressbarDisp.max){
 
-      Worker.User.Amount += Marketing.Fliers.Value;
+      if(Worker.User.Amount != Worker.User.Max){
+
+        Worker.User.Amount += Marketing.Fliers.Value;
+
+      }
 
       Element.usersTextDisp.innerHTML = formatWithCommas(Worker.User.Amount) + " ";
 
@@ -411,7 +416,7 @@ function BuyFlier(){
 
     Marketing.Fliers.Price = (Math.pow(1.5,Marketing.Fliers.Amount)+5);
 
-    progress.max -= 10;
+    progress.max -= 20;
 
     if(Marketing.Fliers.Amount == 0){
       StartMarketing();

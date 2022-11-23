@@ -15,7 +15,7 @@ var idea1 = {
   effect: function(){
 
     idea1.flag = 1;
-    DisplayMessage("Tickets will not sell for 25% more!");
+    DisplayMessage("Tickets will now sell for 25% more!");
     Player.Funds -= 20;
     Tickets.Boost = Tickets.Boost + .25;
     idea1.element.parentNode.removeChild(idea1.element);
@@ -61,18 +61,18 @@ var idea3 = {
 
   id: "ideaButton3",
   title: "Not Enough",
-  pricetag: " ($10.00)",
+  pricetag: " ($20.00)",
   description: "Unlock Analysts and complete tickets faster!",
   uses: 1,
-  trigger: function(){return Player.Funds >= 5},
-  cost: function(){return Player.Funds >= 10},
+  trigger: function(){return Player.Funds >= 10},
+  cost: function(){return Player.Funds >= 20},
   flag: 0,
   element: null,
   effect: function(){
 
     idea3.flag = 1;
     DisplayMessage("You have unlocked analysts!");
-    Player.Funds -= 10
+    Player.Funds -= 20
     Flag.Analyst = 1
     idea3.element.parentNode.removeChild(idea3.element);
     var index = activeIdeas.indexOf(idea3);
