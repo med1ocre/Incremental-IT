@@ -5,18 +5,18 @@ var idea1 = {
 
   id: "ideaButton1",
   title: "Improved Tickets",
-  pricetag: " ($20.00)",
+  pricetag: " ($10.00)",
   description: "Tickets will now sell for 25% higher than the current price!",
   uses: 1,
-  trigger: function(){return Worker.Technician.Amount >= 5},
-  cost: function(){return Player.Funds >= 20},
+  trigger: function(){return Worker.Technician.Amount >= 3},
+  cost: function(){return Player.Funds >= 10},
   flag: 0,
   element: null,
   effect: function(){
 
     idea1.flag = 1;
     DisplayMessage("Tickets will now sell for 25% more!");
-    Player.Funds -= 20;
+    Player.Funds -= 10;
     Tickets.Boost = Tickets.Boost + .25;
     idea1.element.parentNode.removeChild(idea1.element);
     var index = activeIdeas.indexOf(idea1);
@@ -168,3 +168,32 @@ var idea6 = {
 }
 
 ideas.push(idea6);
+
+var idea7 = {
+
+  id: "ideaButton6",
+  title: "Calculator",
+  pricetag: " ($25.00)",
+  description: "Unlock the ability to see your funds per second!",
+  uses: 1,
+  trigger: function(){return Tickets.Total >= 300},
+  cost: function(){return Player.Funds >= 25},
+  flag: 0,
+  element: null,
+  effect: function(){
+
+    idea7.flag = 1;
+    DisplayMessage("You are now able to see your funds per second!");
+    CalculateFundsPerSec();
+    Flag.FundsPerSec = 1;
+    Player.Funds -= 25;
+    idea7.element.parentNode.removeChild(idea7.element);
+    var index = activeIdeas.indexOf(idea7);
+    activeIdeas.splice(index,1);
+
+  }
+
+
+}
+
+ideas.push(idea7);

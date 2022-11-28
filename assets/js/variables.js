@@ -100,7 +100,10 @@ let Flag = {
   Knowledge: 0,
   KnowledgeBar: 0,
   Os: 0,
-  Programming: 0
+  Programming: 0,
+  SkillTree: 0,
+  Fps: 0,
+  FundsPerSec: 0
 
 }
 
@@ -140,6 +143,77 @@ let Os = {
 
 }
 
+let Tree = {
+
+  Perk1: {
+
+    Cost: 0,
+    Flag: 0
+
+  },
+  Perk2: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk3: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk4: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk5: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk6: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk7: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk8: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk9: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk10: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+  Perk11: {
+
+    Cost: 1,
+    Flag: 0
+
+  },
+
+}
+
 let Element = {
    generateTicketBtn: document.getElementById("GenerateTicketButton"),
    KPCapBtn: document.getElementById("KPCapButton"),
@@ -157,6 +231,7 @@ let Element = {
    osTextDisp: document.getElementById("os"),
    kpmaxTextDisp: document.getElementById("kpmax"),
    nextspTextDisp: document.getElementById("nextsp"),
+   fundspersecTextDisp: document.getElementById("fundspersec"),
    queuedticketsTextDisp: document.getElementById("queuedtickets"),
    techniciansTextDisp: document.getElementById("technicians"),
    techniciancostTextDisp: document.getElementById("techniciancost"),
@@ -169,6 +244,7 @@ let Element = {
    satisfactiondivDisp: document.getElementById("satisfactionDiv"),
    knowledgedivDisp: document.getElementById("knowledgeDiv"),
    programmingDivDisp: document.getElementById("programmingDiv"),
+   satisfactiontreeDiv: document.getElementById("satisfactiontreeDiv"),
 
    fliersprogressbarDisp: document.getElementById("fliersprogressbar"),
    knowledgeprogressbarDisp: document.getElementById("knowledgeprogressbar"),
@@ -178,5 +254,17 @@ let Element = {
    readout3TextDisp: document.getElementById("readout3"),
    readout4TextDisp: document.getElementById("readout4"),
    readout5TextDisp: document.getElementById("readout5"),
+
+   perk1Btn: document.getElementById("perk1Btn"),
+   perk2Btn: document.getElementById("perk2Btn"),
+   perk3Btn: document.getElementById("perk3Btn"),
+   perk4Btn: document.getElementById("perk4Btn"),
+   perk5Btn: document.getElementById("perk5Btn"),
+   perk6Btn: document.getElementById("perk6Btn"),
+   perk7Btn: document.getElementById("perk7Btn"),
+   perk8Btn: document.getElementById("perk8Btn"),
+   perk9Btn: document.getElementById("perk9Btn"),
+   perk10Btn: document.getElementById("perk10Btn"),
+   perk11Btn: document.getElementById("perk11Btn")
 
 }

@@ -76,6 +76,7 @@
 
 					Available Funds: $ <span id="funds"></span>
 					<br>
+					<span id="fundspersec" style="display:none;"></span>
 					Tickets in Queue: <span id="queuedtickets"></span>
 					<button style="padding:0.5;border-radius:50%;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
@@ -201,6 +202,51 @@
 
 		<div id="rightColumn" class="whitetext">
 
+			<div id="satisfactiontreeDiv" style="display:none;">
+				<br>
+				<br>
+				<b>The Tree</b>
+				<br>
+				<hr>
+				<p class="satisfactiontreetext">
+
+
+					<div style="position:relative;">
+
+						<button class="skilltreebutton" id="perk1Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem;" onclick="BuyPerk(1)">Unlock Funds</button>
+
+						<button class="skilltreebutton" id="perk2Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:1.6rem; margin-top:3.6rem;" onclick="BuyPerk(2)" disabled >2x Click Value</button>
+
+						<button class="skilltreebutton" id="perk3Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:12.3rem; margin-top:3.6rem;" onclick="BuyPerk(3)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk4Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:1.6rem; margin-top:7rem;" onclick="BuyPerk(4)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk5Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:12.3rem; margin-top:7rem;" onclick="BuyPerk(5)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk6Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:1.6rem; margin-top:10.5rem;" onclick="BuyPerk(6)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk7Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:12.3rem; margin-top:10.5rem;" onclick="BuyPerk(7)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk8Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:1.6rem; margin-top:14.2rem;" onclick="BuyPerk(8)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk9Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:12.3rem; margin-top:14.2rem;" onclick="BuyPerk(9)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk10Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:17rem;" onclick="BuyPerk(10)" disabled>Empty Empty</button>
+
+						<button class="skilltreebutton" id="perk11Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:7rem;" onclick="BuyPerk(11)" disabled>Empty Empty</button>
+
+
+
+						<img src="../media/visual/satisfaction/skilltree.png" alt="">
+					</div>
+
+
+
+
+				</p>
+
+			</div>
+
 			<div id="programmingDiv" style="display:none;">
 				<br>
 				<br>
@@ -210,6 +256,21 @@
 				<p class="programmingtext">
 
 					Current OS: <span id="os"></span> <button id="buildosBtn" onclick="BuildOs();">Build</button>
+
+
+				</p>
+
+			</div>
+
+			<div id="lotteryDiv" style="display:none;">
+				<br>
+				<br>
+				<b>Lottery</b>
+				<br>
+				<hr>
+				<p class="lotterytext">
+
+
 
 
 				</p>
@@ -230,6 +291,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="../js/variables.js"></script>
 	<script src="../js/knowledge.js"></script>
+	<script src="../js/tree.js"></script>
   <script src="../js/script.js"></script>
 
 </body>

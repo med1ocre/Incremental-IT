@@ -85,6 +85,7 @@ window.onload = function(){
 window.setInterval(function(){
 
   ManageIdeas();
+  ManagePerks();
   UpdateButtons();
 
 },10)
@@ -154,7 +155,7 @@ function blink(element){
       }
     }
 
-    }
+}
 
 function UpdateText(){
 
@@ -252,7 +253,26 @@ function UpdateButtons(){
 
   }
 
+  if(Flag.SkillTree == 0){
 
+    Element.satisfactiontreeDiv.style.display = "none";
+
+  }else{
+
+    Element.satisfactiontreeDiv.style.display = "block";
+
+  }
+
+  if(Flag.FundsPerSec == 0){
+
+    Element.fundspersecTextDisp.style.display = "none";
+
+  }else{
+
+    Element.fundspersecTextDisp.style.display = "block";
+    Element.fundspersecTextDisp.innerHTML = "$" + formatWithCommas(Tickets.PerSec, 2) + "/sec";
+
+  }
 
 }
 
@@ -475,6 +495,41 @@ function CalculateIQ(){
 
 }
 
+function CalculateFundsPerSec(){
+
+  var ticks = 0;
+
+  var num1 = Player.Funds;
+
+  var fpsinterval = window.setInterval(function(){
+
+    ticks += 1;
+    console.log(ticks);
+
+    if(ticks >= 4){
+
+      var num2 = Player.Funds;
+
+      var num3 = num2 - num1;
+
+      let finalnumber = num3 / 2;
+
+      Tickets.PerSec = finalnumber;
+
+      clearInterval(fpsinterval);
+
+      CalculateFundsPerSec();
+
+      console.log(finalnumber);
+
+    }
+
+  }, 1000);
+
+
+
+}
+
 
 
 function BuyKPCap(){
@@ -548,6 +603,200 @@ function ManageIdeas(){
             activeIdeas[i].element.style.border = "2px solid black";
         }
     }
+}
+
+function ManagePerks(){
+
+  if(Tree.Perk1.Flag == 0){
+
+    Element.perk1Btn.disabled = false;
+
+  }else{
+
+    Element.perk1Btn.style.backgroundColor = "#062847";
+
+    Element.perk1Btn.disabled = true;
+
+    Element.perk2Btn.disabled = false;
+    Element.perk3Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk2.Flag == 1){
+
+    Element.perk2Btn.style.backgroundColor = "#062847";
+
+    Element.perk2Btn.disabled = true;
+
+    Element.perk4Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk3.Flag == 1){
+
+    Element.perk3Btn.style.backgroundColor = "#062847";
+
+    Element.perk3Btn.disabled = true;
+
+    Element.perk5Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk4.Flag == 1){
+
+    Element.perk4Btn.style.backgroundColor = "#062847";
+
+    Element.perk4Btn.disabled = true;
+
+    Element.perk6Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk5.Flag == 1){
+
+    Element.perk5Btn.style.backgroundColor = "#062847";
+
+    Element.perk5Btn.disabled = true;
+
+    Element.perk7Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk6.Flag == 1){
+
+    Element.perk6Btn.style.backgroundColor = "#062847";
+
+    Element.perk6Btn.disabled = true;
+
+    Element.perk8Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk7.Flag == 1){
+
+    Element.perk7Btn.style.backgroundColor = "#062847";
+
+    Element.perk7Btn.disabled = true;
+
+    Element.perk9Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk6.Flag == 1 && Tree.Perk7.Flag == 1){
+
+    Element.perk11Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk8.Flag == 1){
+
+    Element.perk8Btn.style.backgroundColor = "#062847";
+
+    Element.perk8Btn.disabled = true;
+
+  }
+
+  if(Tree.Perk9.Flag == 1){
+
+    Element.perk9Btn.style.backgroundColor = "#062847";
+
+    Element.perk9Btn.disabled = true;
+
+  }
+
+  if(Tree.Perk8.Flag == 1 && Tree.Perk9.Flag == 1){
+
+    Element.perk10Btn.disabled = false;
+
+  }
+
+  if(Tree.Perk10.Flag == 1){
+
+    Element.perk10Btn.style.backgroundColor = "#062847";
+
+    Element.perk10Btn.disabled = true;
+
+  }
+
+  if(Tree.Perk11.Flag == 1){
+
+    Element.perk11Btn.style.backgroundColor = "#062847";
+
+    Element.perk11Btn.disabled = true;
+
+  }
+
+
+}
+
+function BuyPerk(id){
+
+  if(id == 1){
+
+    Tree.Perk1.Flag = 1;
+
+  }
+
+  if(id == 2){
+
+    Tree.Perk2.Flag = 1;
+
+  }
+
+  if(id == 3){
+
+    Tree.Perk3.Flag = 1;
+
+  }
+
+  if(id == 4){
+
+    Tree.Perk4.Flag = 1;
+
+  }
+
+  if(id == 5){
+
+    Tree.Perk5.Flag = 1;
+
+  }
+
+  if(id == 6){
+
+    Tree.Perk6.Flag = 1;
+
+  }
+
+  if(id == 7){
+
+    Tree.Perk7.Flag = 1;
+
+  }
+
+  if(id == 8){
+
+    Tree.Perk8.Flag = 1;
+
+  }
+
+  if(id == 9){
+
+    Tree.Perk9.Flag = 1;
+
+  }
+
+  if(id == 10){
+
+    Tree.Perk10.Flag = 1;
+
+  }
+
+  if(id == 11){
+
+    Tree.Perk11.Flag = 1;
+
+  }
+
 }
 
 function DisplayIdea(idea){
@@ -636,6 +885,15 @@ function saveGame(){
 function reset() {
     localStorage.removeItem("gameSave");
     location.reload();
+}
 
+function seeall() {
+
+  Flag.Iq = 1;
+  Flag.Analyst = 1;
+  Flag.Support = 1;
+  Flag.Satisfaction = 1;
+  Flag.Knowledge = 1;
+  Flag.Programming = 1;
 
 }
