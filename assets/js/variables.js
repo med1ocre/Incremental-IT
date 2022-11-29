@@ -66,7 +66,7 @@ let Marketing = {
 let Satisfaction = {
 
   Points: 0,
-  NextPoint: 3000
+  NextPoint: 10000
 
 }
 
@@ -103,7 +103,9 @@ let Flag = {
   Programming: 0,
   SkillTree: 0,
   Fps: 0,
-  FundsPerSec: 0
+  FundsPerSec: 0,
+  Lottery: 0,
+  Exchange: 0
 
 }
 
@@ -245,6 +247,8 @@ let Element = {
    knowledgedivDisp: document.getElementById("knowledgeDiv"),
    programmingDivDisp: document.getElementById("programmingDiv"),
    satisfactiontreeDiv: document.getElementById("satisfactiontreeDiv"),
+   lotteryDiv: document.getElementById("lotteryDiv"),
+   exchangeDiv: document.getElementById("exchangeDiv"),
 
    fliersprogressbarDisp: document.getElementById("fliersprogressbar"),
    knowledgeprogressbarDisp: document.getElementById("knowledgeprogressbar"),

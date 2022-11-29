@@ -8,7 +8,7 @@ var idea1 = {
   pricetag: " ($10.00)",
   description: "Tickets will now sell for 25% higher than the current price!",
   uses: 1,
-  trigger: function(){return Worker.Technician.Amount >= 3},
+  trigger: function(){return Worker.Technician.Amount >= 1},
   cost: function(){return Player.Funds >= 10},
   flag: 0,
   element: null,
@@ -171,7 +171,7 @@ ideas.push(idea6);
 
 var idea7 = {
 
-  id: "ideaButton6",
+  id: "ideaButton7",
   title: "Calculator",
   pricetag: " ($25.00)",
   description: "Unlock the ability to see your funds per second!",
@@ -184,7 +184,6 @@ var idea7 = {
 
     idea7.flag = 1;
     DisplayMessage("You are now able to see your funds per second!");
-    CalculateFundsPerSec();
     Flag.FundsPerSec = 1;
     Player.Funds -= 25;
     idea7.element.parentNode.removeChild(idea7.element);
@@ -197,3 +196,31 @@ var idea7 = {
 }
 
 ideas.push(idea7);
+
+var idea8 = {
+
+  id: "ideaButton8",
+  title: "The Tree",
+  pricetag: " ($500.00)",
+  description: "Unlock the tree of satisfaction and start unlocking perks",
+  uses: 1,
+  trigger: function(){return Satisfaction.Points >= 1},
+  cost: function(){return Player.Funds >= 500},
+  flag: 0,
+  element: null,
+  effect: function(){
+
+    idea8.flag = 1;
+    DisplayMessage("You unlocked the tree of satisfaction. Nice");
+    Player.Funds -= 500;
+    Flag.SkillTree = 1;
+    idea8.element.parentNode.removeChild(idea8.element);
+    var index = activeIdeas.indexOf(idea8);
+    activeIdeas.splice(index,1);
+
+  }
+
+
+}
+
+ideas.push(idea8);

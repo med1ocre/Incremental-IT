@@ -188,7 +188,7 @@
 			</div>
 			<br>
 
-			<div id="knowledgeDiv">
+			<div id="knowledgeDiv" style="display:none;">
 				<br>
 				<b>Knowledge</b>
 				<br>
@@ -213,7 +213,7 @@
 
 					<div style="position:relative;">
 
-						<button class="skilltreebutton" id="perk1Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem;" onclick="BuyPerk(1)">Unlock Funds</button>
+						<button class="skilltreebutton" id="perk1Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem;" onclick="BuyPerk(1)">Unlock Lottery</button>
 
 						<button class="skilltreebutton" id="perk2Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:1.6rem; margin-top:3.6rem;" onclick="BuyPerk(2)" disabled >2x Click Value</button>
 
@@ -231,9 +231,9 @@
 
 						<button class="skilltreebutton" id="perk9Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:12.3rem; margin-top:14.2rem;" onclick="BuyPerk(9)" disabled>Empty Empty</button>
 
-						<button class="skilltreebutton" id="perk10Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:17rem;" onclick="BuyPerk(10)" disabled>Empty Empty</button>
+						<button class="skilltreebutton" id="perk10Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:17rem;" onclick="BuyPerk(10)" disabled>Unlock Combat</button>
 
-						<button class="skilltreebutton" id="perk11Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:7rem;" onclick="BuyPerk(11)" disabled>Empty Empty</button>
+						<button class="skilltreebutton" id="perk11Btn" style=" width:20%; font-size:0.7rem; position:absolute; margin-left:7rem; margin-top:7rem;" onclick="BuyPerk(11)" disabled>Unlock Exchange</button>
 
 
 
@@ -262,6 +262,10 @@
 
 			</div>
 
+		</div>
+
+		<div id="rightColumn" class="whitetext">
+
 			<div id="lotteryDiv" style="display:none;">
 				<br>
 				<br>
@@ -270,6 +274,27 @@
 				<hr>
 				<p class="lotterytext">
 
+					<div class="centertext">
+						<h3><span>0</span> | <span>0</span> | <span>0</span></h3>
+						Pot: $1.0k
+						<br>
+						<button>x2</button><button>x5</button><button>x10</button>
+						<br>
+						<button>Spin</button>
+					</div>
+
+				</p>
+				<br>
+
+			</div>
+
+			<div id="exchangeDiv" style="position:relative; display:none;">
+				<br>
+				<br>
+				<b>Exchange</b>
+				<br>
+				<hr>
+				<p class="exchangetext">
 
 
 

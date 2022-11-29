@@ -219,6 +219,12 @@ p.consoleOld {
 
 }
 
+.centertext{
+
+  width:100%;
+  text-align: center;
+
+}
 
 .center {
   justify-content: center;
@@ -382,6 +388,12 @@ h2 {
 }
 
 #rightColumn {
+    float: left;
+    width: 275px;
+    margin-left:10px;
+}
+
+#rightColumn2 {
     float: left;
     width: 275px;
     margin-left:10px;

@@ -14,6 +14,7 @@ document.body.onkeyup = function(e) {
   }
 }
 
+//comma formatter
 formatWithCommas = function(num, decimal) {
     var hasDot = false;
     var base = num.toString();
@@ -57,6 +58,7 @@ formatWithCommas = function(num, decimal) {
         else return leftNum.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + dec;
 }
 
+//number formatter for the letters
 function nFormatter(num) {
      if (num >= 1000000000000) {
         return (num / 1000000000000).toFixed(1).replace(/\.0$/, '') + 'T';
@@ -73,15 +75,18 @@ function nFormatter(num) {
      return num;
 }
 
+//run these functions on page load
 window.onload = function(){
   loadGame();
   UpdateText();
   UpdateButtons();
+  CalculateFundsPerSec()
   if(Marketing.Fliers.Amount >= 1){
     StartMarketing();
   }
 }
 
+//main loop for updating text/stuff
 window.setInterval(function(){
 
   ManageIdeas();
@@ -90,6 +95,7 @@ window.setInterval(function(){
 
 },10)
 
+//interval for the knowledge bar
 window.setInterval(function(){
 
   if(Flag.KnowledgeBar == 1){
@@ -101,6 +107,7 @@ window.setInterval(function(){
 
 },Knowledge.Speed)
 
+//Interval for calculating IQ
 window.setInterval(function(){
 
   if(Knowledge.Points == Knowledge.MaxPoints && Flag.Iq == 1){
@@ -111,20 +118,21 @@ window.setInterval(function(){
 
 },4000)
 
-
+//interval for saving the game every 30 sec
 let saveInterval = window.setInterval(function(){
 
   saveGame();
 
 }, 30000); //30sec
 
-
+//interval to sell tickets
 let sellInterval = window.setInterval(function(){
 
   Sellticket(Tickets.SellCount);
 
 }, Tickets.Speed);
 
+//interval for creating tickets
 let ticketInterval = window.setInterval(function(){
 
   if(Worker.User.Amount >= 1){
@@ -133,6 +141,7 @@ let ticketInterval = window.setInterval(function(){
 
 }, Worker.User.Speed);
 
+//blink function used to make things appear
 function blink(element){
 
     {
@@ -157,6 +166,7 @@ function blink(element){
 
 }
 
+//main text updater
 function UpdateText(){
 
   Element.ticketTextDisp.innerHTML = nFormatter(Tickets.Total);
@@ -181,6 +191,8 @@ function UpdateText(){
 
 }
 
+//i called this button update but
+//its really used mainly for divs and random stuff
 function UpdateButtons(){
 
   if(Satisfaction.Points<=Knowledge.Upgrade.Cap + Knowledge.Upgrade.Spd){
@@ -274,6 +286,38 @@ function UpdateButtons(){
 
   }
 
+  if(Flag.Lottery == 0){
+
+    Element.lotteryDiv.style.display = "none";
+
+  }else{
+
+    Element.lotteryDiv.style.display = "block";
+
+  }
+
+  if(Flag.Exchange == 0){
+
+    Element.exchangeDiv.style.display = "none";
+
+  }else{
+
+    Element.exchangeDiv.style.display = "block";
+
+  }
+
+  if(Flag.Knowledge == 0){
+
+    Element.knowledgedivDisp.style.display = "none";
+
+  }else{
+
+    Element.knowledgedivDisp.style.display = "block";
+
+  }
+
+
+
 }
 
 
@@ -292,7 +336,7 @@ Element.generateTicketBtn.onclick = function(){
 }
 
 
-
+//function for the create ticket interval
 function Createticket(){
 
   let amount = Worker.User.Amount;
@@ -309,6 +353,7 @@ function Createticket(){
 
 }
 
+//function for the sellticket interval
 function Sellticket(ticketsDemanded){
 
   ticketsDemanded = ticketsDemanded + Worker.Technician.SellCount + Worker.Analyst.SellCount + Tickets.Boost;
@@ -347,6 +392,7 @@ function Sellticket(ticketsDemanded){
 
 }
 
+//function for buying a technician
 function BuyTechnician(){
 
   if(Player.Funds >= Worker.Technician.Price){
@@ -373,6 +419,7 @@ function BuyTechnician(){
 
 }
 
+//function for buying an analyst
 function BuyAnalyst(){
 
   if(Player.Funds >= Worker.Analyst.Price){
@@ -399,6 +446,7 @@ function BuyAnalyst(){
 
 }
 
+//function to start marketing
 function StartMarketing(){
 
   var a = 0;
@@ -426,6 +474,7 @@ function StartMarketing(){
 
 }
 
+//function to buy a flier
 function BuyFlier(){
 
   if(Player.Funds >= Marketing.Fliers.Price){
@@ -457,6 +506,7 @@ function BuyFlier(){
 
 }
 
+//function to set satisfaction points
 function setSatisfaction(){
 
   if(Tickets.Total >= Satisfaction.NextPoint){
@@ -472,6 +522,7 @@ function setSatisfaction(){
 
 }
 
+//function for calculationg KP if its reached cap or not
 function CalculateKnowledgePoints(){
 
   if(Knowledge.Points < Knowledge.MaxPoints){
@@ -487,6 +538,7 @@ function CalculateKnowledgePoints(){
 
 }
 
+//function to calculate IQ based on if the the KP bar is capped or not
 function CalculateIQ(){
 
   Knowledge.Iq++
@@ -495,6 +547,7 @@ function CalculateIQ(){
 
 }
 
+//function to calclate how much funds we are recieving every second
 function CalculateFundsPerSec(){
 
   var ticks = 0;
@@ -504,9 +557,8 @@ function CalculateFundsPerSec(){
   var fpsinterval = window.setInterval(function(){
 
     ticks += 1;
-    console.log(ticks);
 
-    if(ticks >= 4){
+    if(ticks >= 2){
 
       var num2 = Player.Funds;
 
@@ -520,8 +572,6 @@ function CalculateFundsPerSec(){
 
       CalculateFundsPerSec();
 
-      console.log(finalnumber);
-
     }
 
   }, 1000);
@@ -531,7 +581,7 @@ function CalculateFundsPerSec(){
 }
 
 
-
+//function to increase the knowledge bar cap
 function BuyKPCap(){
 
   if(Satisfaction.Points>0){
@@ -545,6 +595,7 @@ function BuyKPCap(){
 
 }
 
+//function to increase the knowledge bar speed
 function BuyKPSpd(){
 
   if(Satisfaction.Points>0){
@@ -557,17 +608,40 @@ function BuyKPSpd(){
 
 }
 
+//function to start building the first OS
 function BuildOs(){
 
-  Flag.Os = 1;
+  var num = 30
 
-  Os.ActiveOs = "Windows XP";
+  Element.osTextDisp.style.display = "block";
 
-  Element.osTextDisp.innerHTML = Os.ActiveOs;
+  Element.buildosBtn.style.display = "none";
+
+  Element.osTextDisp.innerHTML = num + "s"
+
+  let osinterval = setInterval(function(){
+
+    num -= 1;
+
+    Element.osTextDisp.innerHTML = num + "s"
+
+    if(num == 0){
+
+      Flag.Os = 1;
+
+      Os.ActiveOs = "Windows XP";
+
+      Element.osTextDisp.innerHTML = Os.ActiveOs;
+
+      clearInterval(osinterval);
+
+    }
+
+  }, 1000)
 
 }
 
-
+//function to display messages in the console
 function DisplayMessage(msg){
 
   Element.readout5TextDisp.innerHTML = Element.readout4TextDisp.innerHTML;
@@ -579,7 +653,7 @@ function DisplayMessage(msg){
 
 }
 
-
+//function to manage/build the idea elements for the knowledge section
 function ManageIdeas(){
     for(var i = 0; i < ideas.length; i++){
         if (ideas[i].trigger() && (ideas[i].uses > 0)){
@@ -605,6 +679,7 @@ function ManageIdeas(){
     }
 }
 
+//function to manage the perk buttons
 function ManagePerks(){
 
   if(Tree.Perk1.Flag == 0){
@@ -729,11 +804,13 @@ function ManagePerks(){
 
 }
 
+//function to buy a perk from the tree
 function BuyPerk(id){
 
   if(id == 1){
 
     Tree.Perk1.Flag = 1;
+    Flag.Lottery = 1;
 
   }
 
@@ -799,6 +876,7 @@ function BuyPerk(id){
 
 }
 
+//function to display/build the idea elements
 function DisplayIdea(idea){
 
   idea.element = document.createElement("button");
@@ -830,41 +908,27 @@ function DisplayIdea(idea){
 }
 
 
-
-
-function loadGame(){
-  //unparse the save
-  var saveGame = JSON.parse(localStorage.getItem("gameSave"));
-  //Make sure that the variable is actually defined, this is for updates so we dont throw any errors
-  if(typeof saveGame.Player !== "undefined"){
-    Player = saveGame.Player;
-  }
-  if(typeof saveGame.Tickets !== "undefined"){
-    Tickets = saveGame.Tickets;
-  }
-  if(typeof saveGame.Worker !== "undefined"){
-    Worker = saveGame.Worker;
-  }
-  if(typeof saveGame.Marketing !== "undefined"){
-    Marketing = saveGame.Marketing;
-  }
-  if(typeof saveGame.Satisfaction !== "undefined"){
-    Satisfaction = saveGame.Satisfaction;
-  }
-  if(typeof saveGame.Knowledge !== "undefined"){
-    Knowledge = saveGame.Knowledge;
-  }
-  if(typeof saveGame.Flag !== "undefined"){
-    Flag = saveGame.Flag;
-  }
-  if(typeof saveGame.Os !== "undefined"){
-    Os = saveGame.Os;
-  }
-}
-
 //function to save our game
 function saveGame(){
-  var gameSave = {
+
+  var ideasUses = [];
+  var ideasFlags = [];
+  var ideasActive = [];
+
+  for(var i=0; i < ideas.length; i++){
+
+    ideasUses[i] = ideas[i].uses;
+    ideasFlags[i] = ideas[i].flag;
+
+  }
+
+  for(var i=0; i < activeIdeas.length; i++){
+
+      ideasActive[i] = activeIdeas[i].id;
+
+  }
+
+  var saveGame = {
     //setting our obects/values
     Player: Player,
     Tickets: Tickets,
@@ -876,17 +940,60 @@ function saveGame(){
     Os: Os
   };
   //stringify it for readability
-  localStorage.setItem("gameSave", JSON.stringify(gameSave));
+  localStorage.setItem("saveGame", JSON.stringify(saveGame));
+  localStorage.setItem("saveIdeasUses", JSON.stringify(ideasUses));
+  localStorage.setItem("saveIdeasFlags", JSON.stringify(ideasFlags));
+  localStorage.setItem("saveIdeasActive", JSON.stringify(ideasActive));
 
   DisplayMessage("Game Saved!");
 
 }
 
+//function to load the game variables
+function loadGame(){
+  //unparse the save
+  var loadGame = JSON.parse(localStorage.getItem("saveGame"));
+  var loadIdeasUses = JSON.parse(localStorage.getItem("saveIdeasUses"));
+  var loadIdeasFlags = JSON.parse(localStorage.getItem("saveIdeasFlags"));
+  var loadIdeasActive = JSON.parse(localStorage.getItem("saveIdeasActive"));
+
+
+  Player = loadGame.Player;
+  Tickets = loadGame.Tickets;
+  Worker = loadGame.Worker;
+  Marketing = loadGame.Marketing;
+  Satisfaction = loadGame.Satisfaction;
+  Knowledge = loadGame.Knowledge;
+  Flag = loadGame.Flag;
+  Os = loadGame.Os;
+  ideasFlag = loadGame.ideasFlag;
+
+  for(var i=0; i < ideas.length; i++){
+
+    ideas[i].uses = loadIdeasUses[i];
+    ideas[i].flag = loadIdeasFlags[i];
+
+    }
+
+    for(var i=0; i < ideas.length; i++){
+
+    if (loadIdeasActive.indexOf(ideas[i].id)>=0){
+        displayProjects(ideas[i]);
+        activeIdeas.push(ideas[i]);
+    }
+
+    }
+
+
+}
+
+//function to reset everything
 function reset() {
     localStorage.removeItem("gameSave");
     location.reload();
 }
 
+//function for admin/dev to see all elements
 function seeall() {
 
   Flag.Iq = 1;
@@ -895,5 +1002,8 @@ function seeall() {
   Flag.Satisfaction = 1;
   Flag.Knowledge = 1;
   Flag.Programming = 1;
+  Flag.SkillTree = 1;
+  Flag.Lottery = 1;
+  Flag.Exchange = 1;
 
 }
